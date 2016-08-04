@@ -26,12 +26,14 @@ var (
 		短信验证码	111111
 	*/
 
-	// 访问银联测试环境调用 SetTestEnv
+	// 默认调用银联正式环境的地址,访问银联测试环境调用 SetTestEnv(true)
 	up = unionpay.NewPayment(mchID, pub, pri, cert).SetTestEnv(true)
 
+	// 示例监听的端口
 	port = ":9090"
 
-	localTunnel = "http://eqfssupbgz.localtunnel.me" // lt --port 9090
+	// 通过 lt --port 9090 获取的外网地址
+	localTunnel = "http://eqfssupbgz.localtunnel.me"
 
 	returnURL       = fmt.Sprintf("%s/%s", localTunnel, "alipay/return")
 	notifyURL       = fmt.Sprintf("%s/%s", localTunnel, "alipay/notify")
