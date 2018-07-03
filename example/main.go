@@ -16,7 +16,7 @@ import (
 var (
 	pub   = "key.cert" //加密密钥路径(openssl pkcs12 -in PM_700000000000001_acp.pfx -clcerts -nokeys -out key.cert)
 	pri   = "key.pem"  //加密证书路径(openssl pkcs12 -in PM_700000000000001_acp.pfx -nocerts -nodes -out key.pem)
-	cert  = "acp_test_verify_sign_new.cer"
+	cert  = "acp_test_verify_sign.cer"
 	mchID = "700000000000001"
 	/*
 		测试商户号 700000000000001
@@ -33,11 +33,10 @@ var (
 	port = ":9090"
 
 	// 通过 lt --port 9090 获取的外网地址
-	localTunnel = "http://eqfssupbgz.localtunnel.me"
+	localTunnel = "https://afraid-moose-0.localtunnel.me"
 
-	returnURL       = fmt.Sprintf("%s/%s", localTunnel, "alipay/return")
-	notifyURL       = fmt.Sprintf("%s/%s", localTunnel, "alipay/notify")
-	returnNotifyURL = fmt.Sprintf("%s/%s", localTunnel, "alipay/return-notify")
+	returnURL = fmt.Sprintf("%s/%s", localTunnel, "unionpay/return")
+	notifyURL = fmt.Sprintf("%s/%s", localTunnel, "unionpay/notify-web")
 )
 
 type MyServeMux struct {
@@ -217,7 +216,7 @@ func NotifyWebServer(w http.ResponseWriter, req *http.Request) {
 		io.WriteString(w, "FAIL")
 		return
 	}
-
+	log.Println("SUCCESS")
 	io.WriteString(w, "SUCCESS")
 	return
 }
